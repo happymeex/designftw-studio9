@@ -26,6 +26,18 @@ input[type="text"] {
     display: none;
 }
 
-#app:not(.logged-in) .backend-controls :is(#logout_button, #save_button) {
+#app:not(.logged-in)
+    :is(.backend-controls :is(#logout_button, #save_button), #user_info) {
     display: none;
+}
+
+#app #user_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#app #user_info img {
+    width: 20vw;
+    border-radius: 50%;
 }

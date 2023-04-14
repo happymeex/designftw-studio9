@@ -1,5 +1,11 @@
+import Backend from "https://madata.dev/src/index.js";
+const backEnd = Backend.from(
+    "https://github.com/happymeex/studio9-starter/data.json"
+);
+
 // Get references to DOM elements
 export const dom = {
+    app: document.querySelector("#app"),
     tasksList: document.querySelector("#tasks_list"),
     taskTemplate: document.querySelector("#task_template"),
     doneCount: document.querySelector("#done_count"),
@@ -7,7 +13,24 @@ export const dom = {
     saveButton: document.querySelector("#save_button"),
     loginButton: document.querySelector("#login_button"),
     logoutButton: document.querySelector("#logout_button"),
+    userInfo: document.querySelector("#user_info"),
 };
+
+function loadUserInfo() {
+    if (backEnd.user.avatar && backEnd.user.username) {
+        dom.userInfo.innerHTML = `<img src="${backEnd.user.avatar}" /> ${backEnd.user.username}`;
+    }
+}
+
+dom.loginButton.addEventListener("click", (e) => {
+    backEnd.login().then(loadUserInfo);
+    dom.app.classList.add("logged-in");
+});
+
+dom.logoutButton.addEventListener("click", (e) => {
+    backEnd.logout();
+    dom.app.classList.remove("logged-in");
+});
 
 // Initialize data. Do we have anything stored?
 if (localStorage.tasks) {
