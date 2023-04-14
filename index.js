@@ -39,19 +39,21 @@ dom.logoutButton.addEventListener("click", (e) => {
 });
 
 // Initialize data. Do we have anything stored?
-if (localStorage.tasks) {
-    let tasks = JSON.parse(localStorage.tasks);
-    for (let task of tasks) {
-        addItem(task);
-    }
-} else {
-    // Add one empty task to start with
-    addItem();
-}
+//if (localStorage.tasks) {
+//    let tasks = JSON.parse(localStorage.tasks);
+//    for (let task of tasks) {
+//        addItem(task);
+//    }
+//} else {
+//    // Add one empty task to start with
+//    addItem();
+//}
+backEnd.load().then((res) => res.forEach(addItem));
 
 // Save when the save button is clicked
 dom.saveButton.addEventListener("click", (e) => {
-    localStorage.tasks = JSON.stringify(getData());
+    //localStorage.tasks = JSON.stringify(getData());
+    backEnd.store(JSON.stringify(getData()));
 });
 
 // Keyboard shortcuts
