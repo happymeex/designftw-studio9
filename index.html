@@ -18,7 +18,9 @@
             <div class="backend-controls">
                 <button id="login_button">Log in</button>
                 <button id="logout_button">Log out</button>
-                <button id="save_button">Save</button>
+                <button id="save_button">
+                    <img src="./img/loader.svg" class="loading-hidden" />Save
+                </button>
             </div>
             <h1 id="user_info"></h1>
             <h1>
@@ -26,6 +28,9 @@
                 <span id="total_count">1</span> total
             </h1>
             <ul id="tasks_list"></ul>
+            <div id="data_loading">
+                <img src="./img/loader.svg" />
+            </div>
             <template id="task_template">
                 <li>
                     <input type="checkbox" aria-label="Done?" class="done" />

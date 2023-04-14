@@ -14,6 +14,10 @@ export const dom = {
     loginButton: document.querySelector("#login_button"),
     logoutButton: document.querySelector("#logout_button"),
     userInfo: document.querySelector("#user_info"),
+    loadingIcons: {
+        save: document.querySelector("#save_button .loading-hidden"),
+        data: document.querySelector("#data_loading img"),
+    },
 };
 
 function loadUserInfo() {
@@ -48,12 +52,23 @@ dom.logoutButton.addEventListener("click", (e) => {
 //    // Add one empty task to start with
 //    addItem();
 //}
-backEnd.load().then((res) => res.forEach(addItem));
+
+backEnd
+    .load()
+    .then((res) => res.forEach(addItem))
+    .then(() => {
+        dom.loadingIcons.data.classList.add("loading-hidden");
+    });
 
 // Save when the save button is clicked
 dom.saveButton.addEventListener("click", (e) => {
     //localStorage.tasks = JSON.stringify(getData());
-    backEnd.store(JSON.stringify(getData()));
+    dom.loadingIcons.save.classList.remove("loading-hidden");
+    dom.saveButton.textContent = "Saving...";
+    backEnd.store(JSON.stringify(getData())).then(() => {
+        dom.loadingIcons.save.classList.add("loading-hidden");
+        dom.saveButton.textContent = "Save";
+    });
 });
 
 // Keyboard shortcuts
