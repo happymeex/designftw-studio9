@@ -22,14 +22,20 @@ function loadUserInfo() {
     }
 }
 
-dom.loginButton.addEventListener("click", (e) => {
-    backEnd.login().then(loadUserInfo);
+backEnd.addEventListener("mv-login", (e) => {
     dom.app.classList.add("logged-in");
+    loadUserInfo();
+});
+backEnd.addEventListener("mv-logout", () => {
+    dom.app.classList.remove("logged-in");
+});
+
+dom.loginButton.addEventListener("click", (e) => {
+    backEnd.login();
 });
 
 dom.logoutButton.addEventListener("click", (e) => {
     backEnd.logout();
-    dom.app.classList.remove("logged-in");
 });
 
 // Initialize data. Do we have anything stored?
