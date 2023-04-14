@@ -58,16 +58,18 @@ backEnd
     .then((res) => res.forEach(addItem))
     .then(() => {
         dom.loadingIcons.data.classList.add("loading-hidden");
+        document.querySelector("#add_button").removeAttribute("disabled");
+        document.querySelector("#clear_button").removeAttribute("disabled");
     });
 
 // Save when the save button is clicked
 dom.saveButton.addEventListener("click", (e) => {
     //localStorage.tasks = JSON.stringify(getData());
-    dom.loadingIcons.save.classList.remove("loading-hidden");
     dom.saveButton.textContent = "Saving...";
+    dom.saveButton.setAttribute("disabled", "");
     backEnd.store(JSON.stringify(getData())).then(() => {
-        dom.loadingIcons.save.classList.add("loading-hidden");
         dom.saveButton.textContent = "Save";
+        dom.saveButton.removeAttribute("disabled");
     });
 });
 

@@ -39,8 +39,12 @@
                 </li>
             </template>
 
-            <button onclick="app.addItem()">Add item</button>
-            <button onclick="app.clearCompleted()">Clear completed</button>
+            <button id="add_button" onclick="app.addItem()" disabled>
+                Add item
+            </button>
+            <button id="clear_button" onclick="app.clearCompleted()" disabled>
+                Clear completed
+            </button>
         </div>
     </body>
 </html>
